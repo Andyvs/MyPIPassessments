@@ -7,7 +7,7 @@ center {
     padding: 10px;
 }
 #usrDetails {
-    background-color: white;
+    background-color: -moz-Field;
     border: 1px solid gray;
     border-radius: 5px;
     border-style: inset;
