@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>MultiSelect Form</title>
+    <link rel="stylesheet" type="text/css" href="css/select.css">
+    <script src="jss/sample-registration-form-validation.js"></script>
+</head>
+
+<body>
+    <center>
+        <form name='multiSel' action="memberDetails.html" id="multiSel" method="post" target="_self">
+
+            <h3>Welcome Select Option</h3>
+            <div name="selDiv">
+                <h5>What are your hobbies..?</h5>
+                <table>
+                    <tr>
+                        <td><input type="checkbox" name="checked" value="Games">Games</br>
+                        </td>
+                        <td><input type="checkbox" name="checked" value="Swimming">Swimming</br>
+                        </td>
+                        <td><input type="checkbox" name="checked" value="Walking">Walking</br>
+                        </td>
+                        <td><input type="checkbox" name="checked" value="Singing">Singing</br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="checked" value="Painting">Painting</br>
+                        </td>
+                        <td><input type="checkbox" name="checked" value="Dancing">Dancing</br>
+                        </td>
+                        <td><input type="checkbox" name="checked" value="Reading">Reading</br>
+                        </td>
+                        <td><input type="checkbox" name="checked" value="Teaching">Teaching</br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="checked" value="Sleeping">Sleeping</br>
+                        </td>
+                    </tr>
+                </table>
+                </br>
+            </div>
+            <div>
+                <h5>Write something about yourself..</h5>
+                <textarea rows="4" name="textArea" cols="50">
+                Start here
+				</textarea></br>
+                </br>
+            </div>
+            <div>
+                <input type="submit" name="submit" onclick="return multiSelectValidation(multiSel);" value="Submit" />
+            </div>
+        </form>
+    </center>
+</body>

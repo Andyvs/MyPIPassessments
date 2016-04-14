@@ -1,0 +1,8 @@
+center {
+    background-color: darkslategrey;
+    height: 450;
+    border: 1px solid gray;
+    border-radius: 5px;
+    border-style: inset;
+    padding: 10px;
+}

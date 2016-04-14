@@ -1,0 +1,33 @@
+body {
+    padding: 30px;
+}
+#header {
+    float: center;
+    color: white;
+    padding: 1px;
+}
+#logInPanel {
+    padding: 10px;
+    width: 260px;
+    background-color: hsl();
+    border: 1px solid gray;
+    border-radius: 5px;
+    border-style: inset;
+    background-color: darkslategrey;
+}
+.to_register {
+    color: red;
+}
+.uname,
+.youpasswd,
+.reg_link {
+    color: white;
+}
+h3,
+.reg_link {
+    background-color: peru;
+    color: white;
+    border: 1px solid gray;
+    border-radius: 5px;
+    border-style: inset;
+}

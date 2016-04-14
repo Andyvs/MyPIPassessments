@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Registration Form</title>
+    <link rel="stylesheet" type="text/css" href="css/reg.css">
+    <script src="jss/sample-registration-form-validation.js"></script>
+</head>
+
+<body onload="setCountries();">
+    <h1>Registration Form</h1>
+    <center>
+        <form name='registration' action="index.html" id="regform" method="post" target="_self">
+            <div id="uname">
+                <table>
+                    <tr>
+                        <td><label class="label-mandatory">First Name : </label></td>
+                        <td><input type="text" name="firstname" size="30" required></td>
+                    </tr>
+                    <tr>
+                        <td><label>Last Name : </label></td>
+                        <td><input type="text" name="lastname" size="30"></td>
+                    </tr>
+                    <tr>
+                        <td><label class="label-mandatory">DOB : </label></td>
+                        <td><input type="date" name="dob" size="30" required></td>
+                    </tr>
+                    <tr>
+                        <td><label class="label-mandatory" name="Gender" id="gender">Gender :</label></td>
+                        <td><input type="radio" name="Gender" value="Male"><span>Male</span>
+                            <input type="radio" name="Gender" value="Female"><span>Female</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label class="label-mandatory">User id :</label></li>
+                        </td>
+                        <td><input type="text" name="userid" size="30" min="8" max="24" required title="User ID must be Alpha Numerics."></td>
+                    </tr>
+                    <tr>
+                        <td><label class="label-mandatory">Password :</label></td>
+                        <td><input type="password" name="passid" size="30" min="8" max="24" required></td>
+                    </tr>
+                    <tr>
+                        <td><label class="label-mandatory">Confirm psw :</label></td>
+                        <td><input type="password" name="confpassid" size="30" required></td>
+                    </tr>
+                    <tr>
+                        <td><label class="label-mandatory">Country :</label></td>
+                        <td>
+                            <select name="country" id="countySel" size="1">
+                           <option value="">Select Country</option>
+                        </select>
+                        </td>
+                        <tr>
+                            <td><label class="label-mandatory">State :</label></td>
+                            <td>
+                                <select name="state" id="stateSel" size="1">
+                           <option value="">Please select state</option>
+                        </select>
+                            </td>
+                        </tr>
+                </table>
+            </div>
+            <div id="regSub">
+                </br><input type="submit" name="submit" onclick="return formValidation(registration);" value="Submit" />
+            </div>
+        </form>
+    </center>
+</body>
+
+</html>

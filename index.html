@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <title>Log In  || Regester</title>
+      <link rel="stylesheet" type="text/css" href="css/indexPage.css">
+      <script src="jss/sample-registration-form-validation.js"></script>
+   </head>
+   <body>
+      <center>
+         <form name="LoginForm"  action="multiselect.html" method="post" target="_self">
+            <h2>Login & Regester Form</h2>
+            <div id="logInPanel">
+               <h3>Welcome To ..</h3>
+               <p> 
+                  <label class="uname">Your UserID</label>
+                  <input id="username" name="username" required="required" type="text" placeholder="eg. sskhan"/>
+               </p>
+               <p> 
+                  <label class="youpasswd">Your Password</label>
+                  <input id="password" name="password" required="required" type="password" placeholder="eg. X8df!90EO" /> 
+               </p>
+               <p> 
+                  <input type="submit" value="Login" name="submit" onclick="return ValidateLogin(LoginForm);">
+               </p>
+               <p class="reg_link">
+                  Not a member yet ?
+                  <a href="register.html">Join us</a>
+               </p>
+            </div>
+         </form>
+      </center>
+   </body>
+</html>

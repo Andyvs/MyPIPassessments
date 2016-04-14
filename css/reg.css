@@ -1,0 +1,31 @@
+html,
+body {
+    padding: 0;
+    border: 2px none;
+}
+h1 {
+    text-align: center;
+}
+#regform {
+    background-color: darkslategrey;
+    padding: 20px;
+    /*border-radius: 10px solid green;*/
+    
+    border: 1px solid gray;
+    border-radius: 5px;
+    border-style: inset;
+    width: 500px;
+    height: 350px;
+}
+table {
+    padding: 30px;
+    margin: 2px;
+}
+label {
+    float: right;
+}
+.label-mandatory {
+    color: red;
+    text-align: right;
+    white-space: nowrap;
+}

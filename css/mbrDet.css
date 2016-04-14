@@ -1,0 +1,32 @@
+center {
+    background-color: darkslategrey;
+    height: 450;
+    border: 1px solid gray;
+    border-radius: 5px;
+    border-style: inset;
+    padding: 10px;
+}
+#usrDetails {
+    background-color: white;
+    border: 1px solid gray;
+    border-radius: 5px;
+    border-style: inset;
+    margin: 30px;
+}
+#usrDetails {
+    padding: 10px;
+}
+#myTable {
+    border: 1px;
+    width: 15%;
+}
+#detTable {
+    border: 1px;
+    width: 80%;
+}
+#aboutU {
+    border: 1px solid gray;
+    border-radius: 5px;
+    border-style: inset;
+    padding: 15px;
+}
