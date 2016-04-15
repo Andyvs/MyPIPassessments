@@ -65,7 +65,7 @@
     };
 
     // User First Name Validation
-    function ValidateFName(f_name, min, max) {
+    function ValidateFName(f_name) {
         regx = /^[a-zA-Z ]*$/;
 
         // Function invoking for validating empty fields.
@@ -82,21 +82,23 @@
     };
 
     // User Last Name Validation
-    function ValidateLName(l_name, min, max) {
+    function ValidateLName(l_name) {
         regx = /^[a-zA-Z ]*$/;
 
-        // Function invoking for validating empty fields.
-        if (!validateEmptyFields(l_name)) {
-            // returning true as it is not mandotory field.
-            return true;
-        } else if (!validateMinMax(l_name, 8, 24)) {
-            return false;
-        } else if (regx.test(l_name.value)) {
-            userDet['lastname'] = l_name.value;
-            return true;
-        } else {
-            alert("User Last Name should be Alphabet");
+        // Function invoking for validating lenght.
+        if(l_name.value)
+        {
+            if (!validateMinMax(l_name, 8, 24)) {
+                return false;
+            } else if (regx.test(l_name.value)) {
+                userDet['lastname'] = l_name.value;
+                return true;
+            } else {
+                alert("User Last Name should be Alphabet");
+                return false;
+            }
         }
+        return true;
     };
 
     // User Date of Birth Validation
@@ -130,7 +132,7 @@
     };
 
     // User ID Validation
-    function ValidateUserId(uid, min, max) {
+    function ValidateUserId(uid) {
         regx = /^[a-zA-Z0-9]*$/;
 
         // Function invoking for validating empty fields.
@@ -148,7 +150,7 @@
     };
 
     // Password Validation
-    function ValidatePSW(passid, min, max) {
+    function ValidatePSW(passid) {
         var pwd_spl_chrs = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/;
         var valid_psw = 0;
 
@@ -208,14 +210,14 @@
     var validateEmptyFields = function(fieldObj) {
         // This condition id for Radio/Checkboxes.
         if (fieldObj.length > 1) {
-            if (fieldObj[0].type == 'radio') {
-                for (var i = 0; i < fieldObj.length; i++) {
-                    if (fieldObj[i].checked)
-                        break;
-                }
-                if (i == fieldObj.length)
-                    return alert("Please select Gender");
-                return true;
+                if (fieldObj[0].type == 'radio') {
+                    for (var i = 0; i < fieldObj.length; i++) {
+                        if (fieldObj[i].checked)
+                            break;
+                    }
+                    if (i == fieldObj.length)
+                        return alert("Please select Gender");
+                    return true;
             } else if (fieldObj.type == 'select-one') {
                 for (var i = 0; i < fieldObj.length; i++) {
                     if (fieldObj.selectedIndex == 0)
@@ -223,14 +225,6 @@
                 }
                 if (i == fieldObj.length)
                     return true;
-            } else if (fieldObj[0].type == 'checkbox') {
-                for (var i = 0; i < fieldObj.length; i++) {
-                    if (fieldObj[i].checked)
-                        break;
-                }
-                if (i == fieldObj.length)
-                    return alert("Please select " + fieldObj.name);
-                return true;
             }
         } else if (!fieldObj.value) {
             alert("Please Enter " + fieldObj.name);
@@ -271,7 +265,7 @@
         if (!userIDMatch && pswMatch) {
             alert("UserID or Password is not exists. Please register.");
         } else if ((userIDMatch == user_id.value) && (pswMatch == password.value)) {
-            alert("user id and password matches the record which has registered.");
+            alert("Your are successfully logged in.");
             get_details = window.location.search
             window.location = 'multiselect.html?userDetails=' + get_details;
         } else {
@@ -288,14 +282,36 @@
         // Local Storage
         var storeData = window.localStorage;
 
-        // Function invoking for validating empty fields.
-        if (!validateEmptyFields(MultiSelect)) {
+        var subInputs = MultiSelect.getElementsByTagName('div').selDiv;
+        var selectED = subInputs.getElementsByTagName('input');
+
+        //defining the counter variable for counting checked
+        var counter = 0;
+
+        for(var i=0;i<selectED.length;i++) 
+        {
+            if (selectED[i].checked){
+                counter  += 1;
+                storeData[selectED[i].name] = selectED[i].value;
+            }
+            if (i == selectED.length)
+                return true;
+       }
+       if(!counter){
+            alert("Please select your hobbies");
             return false;
-        } else if (MultiSelect) {
-            storeData['hobbies'] = MultiSelect.getElementsByTagName('input')[0].value;
-            return true;
         }
-        };
+
+         //TextArea validation
+        var TextArea = MultiSelect.getElementsByTagName('textarea').aboutUser;
+            if(TextArea.value){
+                storeData[TextArea.name] = TextArea.value;
+                return true;
+        }
+        return true;
+    };
+
+
 
         function updateDetails(mbrObj) {
             // getting the user details from the array
@@ -310,21 +326,41 @@
             userCountry = getData.Country;
             userState = getData.State;
             hobby = getData.Games;
+            aboutText = getData.aboutUser;
+
+            //fetching the hobbies
+            game = getData.game;
+            swim = getData.swim;
+            walk = getData.walk;
+            sing = getData.sing;
+            paint = getData.paint;
+            dance = getData.dance;
+            read = getData.read;
+            teach = getData.teach;
+            sleep = getData.sleep;
 
             //Update Data
-            var myTable = document.getElementById('detTable');
-            detTable.rows[0].cells[1].innerHTML = userFname;
-            detTable.rows[0].cells[3].innerHTML = userLname;
-            detTable.rows[0].cells[5].innerHTML = userDOB;
-            detTable.rows[0].cells[7].innerHTML = userGender;
-
-            detTable.rows[1].cells[1].innerHTML = userID;
-            detTable.rows[1].cells[3].innerHTML = userCountry;
-            detTable.rows[1].cells[5].innerHTML = userState;
+            mbrObj.fname.value = userFname;
+            mbrObj.lname.value = userLname;
+            mbrObj.dob.value = userDOB;
+            mbrObj.gender.value = userGender;
+            mbrObj.userid.value = userID;
+            mbrObj.country.value = userCountry;
+            mbrObj.state.value = userState;
 
 
             //Update data
             var myTable = document.getElementById('myTable');
-            myTable.rows[1].cells[0].innerHTML = hobby;
-            myTable.rows[2].cells[0].innerHTML = hobby;
+            myTable.rows[0].cells[0].innerHTML = game;
+            myTable.rows[0].cells[1].innerHTML = swim;
+            myTable.rows[0].cells[2].innerHTML = walk;
+            myTable.rows[1].cells[0].innerHTML = sing;
+            myTable.rows[1].cells[1].innerHTML = paint;
+            myTable.rows[1].cells[2].innerHTML = dance;
+            myTable.rows[2].cells[0].innerHTML = read;
+            myTable.rows[2].cells[1].innerHTML = teach;
+            myTable.rows[2].cells[2].innerHTML = sleep;
+
+            //Update data in TextArea
+            mbrObj.getElementsByTagName('textarea').aboutI.value = aboutText;
         };

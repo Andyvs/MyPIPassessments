@@ -12,43 +12,43 @@
     <center>
         <form name='multiSel' action="memberDetails.html" id="multiSel" method="post" target="_self">
 
-            <h3>Welcome Select Option</h3>
-            <div name="selDiv">
+            <h3>Welcome To ...</h3>
+            <div name="selDiv" id="selHob">
                 <h5>What are your hobbies..?</h5>
                 <table>
                     <tr>
-                        <td><input type="checkbox" name="chk" value="Games">Games</br>
+                        <td><input type="checkbox" name="game" value="Games">Games</br>
                         </td>
-                        <td><input type="checkbox" name="chk" value="Swimming">Swimming</br>
+                        <td><input type="checkbox" name="swim" value="Swimming">Swimming</br>
                         </td>
-                        <td><input type="checkbox" name="chk" value="Walking">Walking</br>
+                        <td><input type="checkbox" name="walk" value="Walking">Walking</br>
                         </td>
-                        <td><input type="checkbox" name="chk" value="Singing">Singing</br>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="chk" value="Painting">Painting</br>
-                        </td>
-                        <td><input type="checkbox" name="chk" value="Dancing">Dancing</br>
-                        </td>
-                        <td><input type="checkbox" name="chk" value="Reading">Reading</br>
-                        </td>
-                        <td><input type="checkbox" name="chk" value="Teaching">Teaching</br>
+                        <td><input type="checkbox" name="sing" value="Singing">Singing</br>
                         </td>
                     </tr>
                     <tr>
-                        <td><input type="checkbox" name="chk" value="Sleeping">Sleeping</br>
+                        <td><input type="checkbox" name="paint" value="Painting">Painting</br>
+                        </td>
+                        <td><input type="checkbox" name="dance" value="Dancing">Dancing</br>
+                        </td>
+                        <td><input type="checkbox" name="read" value="Reading">Reading</br>
+                        </td>
+                        <td><input type="checkbox" name="teach" value="Teaching">Teaching</br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="sleep" value="Sleeping">Sleeping</br>
                         </td>
                     </tr>
                 </table>
                 </br>
             </div>
-            <div>
+            <div name="uAbout" id="selHob">
                 <h5>Write something about yourself..</h5>
                 <textarea rows="4" name="aboutUser" cols="50"></textarea></br>
                 </br>
             </div>
-            <div>
+            <div id="selHob">
                 <input type="submit" name="submit" onclick="return multiSelectValidation(multiSel);" value="Submit" />
             </div>
         </form>

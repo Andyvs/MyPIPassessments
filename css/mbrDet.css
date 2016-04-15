@@ -1,32 +1,18 @@
-center {
-    background-color: darkslategrey;
-    height: 450;
+#usrDetails, #usrHobbies, #aboutU {
+   background-color: darkslategrey;
     border: 1px solid gray;
     border-radius: 5px;
     border-style: inset;
+    width: 650px;
     padding: 10px;
 }
-#usrDetails {
-    background-color: -moz-Field;
-    border: 1px solid gray;
-    border-radius: 5px;
-    border-style: inset;
-    margin: 30px;
+label{
+    color: white;
 }
-#usrDetails {
-    padding: 10px;
+img{
+    width: 150px;
+    height: 50px;
 }
-#myTable {
-    border: 1px;
-    width: 15%;
-}
-#detTable {
-    border: 1px;
-    width: 80%;
-}
-#aboutU {
-    border: 1px solid gray;
-    border-radius: 5px;
-    border-style: inset;
-    padding: 15px;
+span{
+    color: blue;
 }
