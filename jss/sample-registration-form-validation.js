@@ -27,7 +27,8 @@
     }
 
     // formValidation for Register Form
-    var userDet = new Array();
+    var userDet = {}
+    var userHobby = {}
 
     function formValidation(formObj) {
         var Fname = formObj['firstname'];
@@ -48,15 +49,8 @@
             // Local Storage
             storeData = window.localStorage;
 
-            //Store data in localstorage for persistance.
-            storeData.setItem("FirstName", userDet.firstname);
-            storeData.setItem("LastName", userDet.lastname);
-            storeData.setItem("DateOfBirth", userDet.dob);
-            storeData.setItem("Gender", userDet.gender);
-            storeData.setItem("UserID", userDet.userid);
-            storeData.setItem("Password", userDet.password);
-            storeData.setItem("Country", userDet.country);
-            storeData.setItem("State", userDet.state);
+            // Put the object into storage
+            storeData.setItem('userTest', JSON.stringify(userDet));
 
             return true;
         } else {
@@ -256,11 +250,20 @@
             return false;
         }
 
-        // getting the user details from the array
-        getData = window.localStorage
 
-        userIDMatch = getData.UserID;
-        pswMatch = getData.Password;
+        // getting the user details from the array
+        var getData = window.localStorage;
+
+
+        // Retrieve the object from storage
+        var retrievedObject = getData.getItem('userTest');
+        var logDet = JSON.parse(retrievedObject);
+
+        //check if there are Registered datas.
+        if(getData.length != 0)
+        {
+            var userIDMatch = logDet.userid;
+            var pswMatch = logDet.password;
 
         if (!userIDMatch && pswMatch) {
             alert("UserID or Password is not exists. Please register.");
@@ -270,6 +273,11 @@
             window.location = 'multiselect.html?userDetails=' + get_details;
         } else {
             alert("UserID or Password not valid.");
+            return false;
+        }
+        }
+        else{
+            alert("Seems like this user is not registered. Please register and Login.");
             return false;
         }
     };
@@ -292,7 +300,10 @@
         {
             if (selectED[i].checked){
                 counter  += 1;
-                storeData[selectED[i].name] = selectED[i].value;
+                userHobby[selectED[i].name] = selectED[i].value;
+
+                // Put the object into storage
+                storeData.setItem('selHob', JSON.stringify(userHobby));
             }
             if (i == selectED.length)
                 return true;
@@ -305,7 +316,10 @@
          //TextArea validation
         var TextArea = MultiSelect.getElementsByTagName('textarea').aboutUser;
             if(TextArea.value){
-                storeData[TextArea.name] = TextArea.value;
+                userHobby[TextArea.name] = TextArea.value;
+
+                // Put the object into storage
+                storeData.setItem('Uabout', JSON.stringify(userHobby));
                 return true;
         }
         return true;
@@ -315,31 +329,37 @@
 
         function updateDetails(mbrObj) {
             // getting the user details from the array
-            // getting the user details from the array
-            getData = window.localStorage
+            var getData = window.localStorage;
 
-            userFname = getData.FirstName;
-            userLname = getData.LastName;
-            userDOB = getData.DateOfBirth;
-            userGender = getData.Gender;
-            userID = getData.UserID;
-            userCountry = getData.Country;
-            userState = getData.State;
-            hobby = getData.Games;
-            aboutText = getData.aboutUser;
+            // Retrieve the user info object from storage
+            var retrievedUserObject = getData.getItem('userTest');
+            var userProfile = JSON.parse(retrievedUserObject);
+
+            userFname = userProfile.firstname;
+            userLname = userProfile.lastname;
+            userDOB = userProfile.dob;
+            userGender = userProfile.gender;
+            userID = userProfile.userid;
+            userCountry = userProfile.country;
+            userState = userProfile.state;
+
+            // Retrieve the user info object from storage
+            var retrievedHobbiesObject = getData.getItem('Uabout');
+            var userHobbies = JSON.parse(retrievedHobbiesObject);
 
             //fetching the hobbies
-            game = getData.game;
-            swim = getData.swim;
-            walk = getData.walk;
-            sing = getData.sing;
-            paint = getData.paint;
-            dance = getData.dance;
-            read = getData.read;
-            teach = getData.teach;
-            sleep = getData.sleep;
+            game = userHobbies.game;
+            swim = userHobbies.swim;
+            walk = userHobbies.walk;
+            sing = userHobbies.sing;
+            paint = userHobbies.paint;
+            dance = userHobbies.dance;
+            read = userHobbies.read;
+            teach = userHobbies.teach;
+            sleep = userHobbies.sleep;
+            aboutText = userHobbies.aboutUser;
 
-            //Update Data
+            //Update user details into the fiels.
             mbrObj.fname.value = userFname;
             mbrObj.lname.value = userLname;
             mbrObj.dob.value = userDOB;
@@ -349,7 +369,7 @@
             mbrObj.state.value = userState;
 
 
-            //Update data
+            //Update user hobbies into the fields
             var myTable = document.getElementById('myTable');
             myTable.rows[0].cells[0].innerHTML = game;
             myTable.rows[0].cells[1].innerHTML = swim;
@@ -361,6 +381,6 @@
             myTable.rows[2].cells[1].innerHTML = teach;
             myTable.rows[2].cells[2].innerHTML = sleep;
 
-            //Update data in TextArea
+            //Update about user into the textarea.
             mbrObj.getElementsByTagName('textarea').aboutI.value = aboutText;
         };
