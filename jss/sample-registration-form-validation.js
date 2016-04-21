@@ -210,7 +210,7 @@
                             break;
                     }
                     if (i == fieldObj.length)
-                        return alert("Please select Gender");
+                        return alert("Please select "+ fieldObj[0].name);
                     return true;
             } else if (fieldObj.type == 'select-one') {
                 for (var i = 0; i < fieldObj.length; i++) {
@@ -287,30 +287,24 @@
     // Validating Multiple selection
     function multiSelectValidation(MultiSelect) {
 
-        // Local Storage
-        var storeData = window.localStorage;
-
-        var subInputs = MultiSelect.getElementsByTagName('div').selDiv;
-        var selectED = subInputs.getElementsByTagName('input');
-
-        //defining the counter variable for counting checked
-        var counter = 0;
-
-        for(var i=0;i<selectED.length;i++) 
-        {
-            if (selectED[i].checked){
-                counter  += 1;
-                userHobby[selectED[i].name] = selectED[i].value;
-
-                // Put the object into storage
-                storeData.setItem('selHob', JSON.stringify(userHobby));
-            }
-            if (i == selectED.length)
-                return true;
-       }
-       if(!counter){
-            alert("Please select your hobbies");
+        var selHobbies = MultiSelect['hobbies'];
+        if (!validateEmptyHobSpot(selHobbies)){
             return false;
+        }
+        
+        // Validating favourite spot
+        var selFavSpot = MultiSelect['favspot'];
+        if (!validateEmptyHobSpot(selFavSpot)){
+            return false;
+        }
+
+        // Validating Mother tongue
+        var selTongue = MultiSelect['language'];
+        // Function invoking for validating empty fields.
+        if (!validateEmptyFields(selTongue)) {
+            return false;
+        } else if (selTongue) {
+            userDet['tongue'] = selTongue.value;
         }
 
          //TextArea validation
@@ -326,6 +320,31 @@
     };
 
 
+        function validateEmptyHobSpot(selectObj){
+
+        // Local Storage
+        var storeData = window.localStorage;
+        
+        //defining the counter variable for counting checked
+        var counter = 0;
+
+        for(var i=0;i<selectObj.length;i++) 
+        {
+            if (selectObj[i].checked){
+                counter  += 1;
+                userHobby[selectObj[i].name] = selectObj[i].value;
+
+                // Put the object into storage
+                storeData.setItem('selHob', JSON.stringify(userHobby));
+            }
+            if (i == selectObj.length)
+                return true;
+       }
+       if(!counter){
+            return alert("Please select your " + selectObj[0].name);
+        }
+        return true;
+    };
 
         function updateDetails(mbrObj) {
             // getting the user details from the array
