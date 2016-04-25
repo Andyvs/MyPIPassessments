@@ -2,14 +2,15 @@ html,
 body {
     padding: 0;
     border: 2px none;
+    background-image: url("/vanand/MyPIPassessments/image/wood.jpg");
 }
 h1 {
     text-align: center;
 }
 #regform {
-    background-color: darkslategrey;
+    /*background-color: darkslategrey;*/
     padding: 20px;
-    border: 1px solid gray;
+    border: 1px solid maroon;
     border-radius: 5px;
     border-style: inset;
     width: 500px;

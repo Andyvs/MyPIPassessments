@@ -1,6 +1,11 @@
+body {
+    /*padding: 120px;*/
+    background-image: url("/vanand/MyPIPassessments/image/wood.jpg");
+}
+
 #usrDetails, #usrHobbies, #aboutU {
-   background-color: darkslategrey;
-    border: 1px solid gray;
+   /*background-color: darkslategrey;*/
+    border: 1px solid maroon;
     border-radius: 5px;
     border-style: inset;
     width: 650px;

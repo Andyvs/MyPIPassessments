@@ -26,6 +26,17 @@
         }
     }
 
+    function showhideRegisterDiv(formObj){
+        var div = formObj['regForm'];
+        if (div.style.display !== "none") 
+            {
+                div.style.display = "none";
+            }
+        else {
+                div.style.display = "block";
+            }
+        };
+
     // formValidation for Register Form
     var userDet = {}
     var userHobby = {}
@@ -277,7 +288,7 @@
         }
         }
         else{
-            alert("Seems like this user is not registered. Please register and Login.");
+            alert("Seems like " + user_id.value + " is not registered. Please register and Login.");
             return false;
         }
     };
@@ -308,7 +319,7 @@
         }
 
          //TextArea validation
-        var TextArea = MultiSelect.getElementsByTagName('textarea').aboutUser;
+        var TextArea = MultiSelect['aboutUser'];
             if(TextArea.value){
                 userHobby[TextArea.name] = TextArea.value;
 

@@ -1,6 +1,10 @@
+body {
+    background-image: url("/vanand/MyPIPassessments/image/wood.jpg");
+}
+
 #selHob{
-	background-color: darkslategrey;
-    border: 1px inset gray;
+	/*background-color: darkslategrey;*/
+    border: 1px inset maroon;
     border-radius: 5px;
     /*padding: 20px;*/
     width: 500px;
@@ -10,11 +14,3 @@ img{
     width: 150px;
     height: 50px;
 }
-/*#selHob{
-	background-color: darkslategrey;
-    border: 1px inset gray;
-    border-radius: 5px;
-    padding: 20px;
-    width: 500px;
-    color: white;
-}*/
