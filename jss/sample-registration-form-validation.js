@@ -75,6 +75,9 @@
             just[uid.value] = userDet
 
             showRegForm();
+
+            // passing the userid to the next page as a hidden
+            document.getElementById('who').value = uid.value;
         } else {
             return false;
         }
@@ -341,6 +344,7 @@
     function validateEmptyHobSpot(selectObj) {
         // array that will store the value of selected checkboxes
         var checkedValue = [];
+        usr = document.getElementById('who').value;
 
         //defining the counter variable for counting checked
         var counter = 0;
@@ -350,7 +354,7 @@
                 counter += 1;
                 checkedValue.push(selectObj[i].value);
                 if(selectObj[i].name == 'hobbies'){
-                    just['hobbies'] = checkedValue    
+                    just['hobbies'] = checkedValue
                 }
                 else if(selectObj[i].name == 'favspot'){
                     just['favSpot'] = checkedValue
