@@ -6,24 +6,218 @@
       <link rel="stylesheet" type="text/css" href="css/indexPage.css">
       <script src="jss/sample-registration-form-validation.js"></script>
    </head>
-   <body>
+   <body onload="setCountries();">
       <center>
-         <form name="LoginForm"  action="multiselect.html" method="post" target="_self">
+        
+        <div id="logInPanel" style="display:block">
+         <form name="LoginForm" method="post" target="_self">
             <h2>Login & Regester Form</h2>
-            <div id="logInPanel">
-               <h3>Welcome To ..</h3>
+             <h3>Welcome To ..</h3>
                <p> 
-                  <label class="uname">Your UserID</label>
-                  <input id="username" name="username" required="required" type="text" placeholder="eg. sskhan"/>
-                  <label class="youpasswd">Your Password</label>
-                  <input id="password" name="password" required="required" type="password" placeholder="eg. X8df!90EO" /> 
+                  <input type="hidden" name="usr" id="usr" value="">
+                  <input type="hidden" name="psw" id="psw" value="">
+
+                  <label class="uname">User ID :</label>
+                  <input id="username" name="username" required="required" value='' type="text" placeholder="eg. sskhan"/>
+                  <label class="youpasswd">Password :</label>
+                  <input id="password" name="password" required="required" value='' type="password" placeholder="eg. X8df!90EO" /> 
                </p>
                <p> 
-                  <input type="submit" value="Login" name="submit" onclick="return ValidateLogin(LoginForm);">
-                  <span> Not a member yet ? <a href="register.html">Join us</a> </span>
+                  <input type="button" value="Login" name="login" onclick="return ValidateLogin(LoginForm);">
+                  <span> Not a member yet ? <a href="javascript:void(0);" onclick="showRegForm()">Join us</a> </span>
                </p>
+          </form>
+        </div>
+
+        <div id="uname" style="display:none">
+              <form name="RegistrationForm" method="post" target="_self">
+                <input type="hidden" name="user_det" id="user_det" value="">
+                <div>
+                  <h2>Regester Form</h2>
+                  <table>
+                      <tr>
+                          <td><label class="label-mandatory">First Name : </label></td>
+                          <td><input type="text" name="firstname" size="30" value="" required></td>
+                      </tr>
+                      <tr>
+                          <td><label>Last Name : </label></td>
+                          <td><input type="text" name="lastname" size="30"></td>
+                      </tr>
+                      <tr>
+                          <td><label class="label-mandatory">DOB : </label></td>
+                          <td><input type="text" name="dob" size="30" required></td>
+                      </tr>
+                      <tr>
+                          <td><label class="label-mandatory" name="Gender" id="gender">Gender :</label></td>
+                          <td><input type="radio" name="Gender" value="Male"><span>Male</span>
+                              <input type="radio" name="Gender" value="Female"><span>Female</span>
+                          </td>
+                      </tr>
+                      <tr>
+                          <td><label class="label-mandatory">User id :</label></li>
+                          </td>
+                          <td><input type="text" name="userid" size="30" min="8" max="24" required title="User ID must be Alpha Numerics."></td>
+                      </tr>
+                      <tr>
+                          <td><label class="label-mandatory">Password :</label></td>
+                          <td><input type="password" name="passid" size="30" min="8" max="24" required></td>
+                      </tr>
+                      <tr>
+                          <td><label class="label-mandatory">Confirm psw :</label></td>
+                          <td><input type="password" name="confpassid" size="30" required></td>
+                      </tr>
+                      <tr>
+                          <td><label class="label-mandatory">Country :</label></td>
+                          <td>
+                              <select name="country" id="countySel" size="1">
+                             <option value="">Select Country</option>
+                          </select>
+                          </td>
+                          <tr>
+                              <td><label class="label-mandatory">State :</label></td>
+                              <td>
+                                  <select name="state" id="stateSel" size="1">
+                             <option value="">Please select state</option>
+                          </select>
+                              </td>
+                          </tr>
+                  </table>
+              </div>
+              <div id="regSub">
+                 <br><input type="button" name="register" value="Submit" onclick="formValidation(RegistrationForm)">
+              </div>
+            </form>
+          </div>
+
+          <div id="multiSelect" style="display:none">
+            <form name='multiSel' id="multiSel" method="post" target="_self">
+
+            <h4>Welcome To ...</h4>
+            <div name="hob" id="selHob">
+                <h5>What are your hobbies..?</h5>
+                <table>
+                    <tr>
+                        <td><input type="checkbox" name="hobbies" value="Games">Games</br>
+                        </td>
+                        <td><input type="checkbox" name="hobbies" value="Swimming">Swimming</br>
+                        </td>
+                        <td><input type="checkbox" name="hobbies" value="Walking">Walking</br>
+                        </td>
+                        <td><input type="checkbox" name="hobbies" value="Singing">Singing</br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="hobbies" value="Painting">Painting</br>
+                        </td>
+                        <td><input type="checkbox" name="hobbies" value="Dancing">Dancing</br>
+                        </td>
+                        <td><input type="checkbox" name="hobbies" value="Reading">Reading</br>
+                        </td>
+                        <td><input type="checkbox" name="hobbies" value="Teaching">Teaching</br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="hobbies" value="Sleeping">Sleeping</br>
+                        </td>
+                    </tr>
+                </table>
+                </br>
             </div>
-         </form>
+
+            <div name="spot"  id="selHob">
+                <h5>What are your favourite spot..?</h5>
+                <table>
+                    <tr>
+                        <td><input type="checkbox" name="favspot" value="Hill Stations">Hill Stations</br>
+                        </td>
+                        <td><input type="checkbox" name="favspot" value="Seashore">Seashore</br>
+                        </td>
+                        <td><input type="checkbox" name="favspot" value="Forest">Forest</br>
+                        </td>
+                        <td><input type="checkbox" name="favspot" value="Deserts">Deserts</br>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div name="toung" id="selHob">
+                <h5>Which is your Mother tongue ..?</h5>
+                <input type="radio" name="language" value="Kannada"><span>Kannada</span>
+                <input type="radio" name="language" value="Hindi"><span>Hindi</span>
+                <input type="radio" name="language" value="Marathi"><span>Marathi</span>
+                <input type="radio" name="language" value="Telagu"><span>Telagu</span>
+            </div>
+            <div name="uAbout" id="selHob">
+                <h5>Write something about yourself..</h5>
+                <textarea rows="3" name="aboutUser" cols="50"></textarea></br>
+                </br>
+            </div>
+            <div id="selHob">
+                <input type="button" name="multi" value="Submit" onclick="return multiSelectValidation(multiSel);">
+            </div>
+        </form>
+      </div>
+
+      <div name="mbrDet" id="mbrDet" style="display:none">
+        <form name="mbrForm">
+        <div id="usrDetails">
+          <table width=100%>
+            <tr>
+                <td><label> Firt Name : </label></td>
+                <td><input id="fname" name="fname"  readonly "></td>
+                <td><label>Last Name : </label></td>
+                <td><input id="lname" name="lname"  readonly "></td>
+            </tr>
+           <tr>
+                <td><label>Date of Birth :&nbsp;&nbsp;</label></td>
+                <td><input id="dob" name="dob" type="date" readonly "></td>
+                <td><label>Gender :</label></td>
+                <td><input id="gender" name="gender" readonly "></td>
+            <tr>
+            </tr>
+                <td><label> User ID :</label></td>
+                <td><input id="userid" name="userid"  readonly "></td>
+                <td><label>    Country :</label></td>
+                <td><input id="country" name="country" readonly "></td>
+            </tr>
+            <tr>
+                <td><label> State :</label></td>
+                <td><input id="state" name="state" readonly "></td>                                
+            </tr>
+          </table>
+        </div>
+
+        <div id="usrHobbies">
+            <!-- <h5> Your Hobbies are ..</h5> -->
+            <span>Your Hobbies are ..</span>
+            <table id="myTable" style="height: 63px;" border="1" width="135">
+                <tbody>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="aboutU">
+            <img src="/vanand/MyPIPassessments/image/aboutU.png"  alt="about YOU"/>
+            <textarea cols="90" name="aboutI" readonly="readonly" rows="2"></textarea>
+        </div>
+    </form>
+      </div>
+
+
       </center>
    </body>
 </html>

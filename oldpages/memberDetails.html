@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Member Details Form</title>
+    <link rel="stylesheet" type="text/css" href="css/mbrDet.css">
+    <script src="jss/sample-registration-form-validation.js"></script>
+</head>
+<body onload="updateDetails(mbrForm);">
+
+<center>
+    <p>
+        <img src="/vanand/MyPIPassessments/image/user_info.png"  alt="about YOU"/><span>User Details</span>
+    </p>
+    <form name="mbrForm">
+        <div id="usrDetails">
+            <p>
+                <label>&nbsp; &nbsp; &nbsp;Firt Name : &nbsp;</label>
+                <input id="fname" name="fname"  readonly ">
+                 <label>&nbsp; &nbsp; Last Name :&nbsp;&nbsp;</label>
+                <input id="lname" name="lname"  readonly ">
+            </p>
+            <p>
+                <label>Date of Birth :&nbsp;&nbsp;</label>
+                <input id="dob" name="dob" type="date" readonly ">
+                <label>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Gender :&nbsp;&nbsp;</label>
+                <input id="gender" name="gender" readonly ">
+            </p>
+            <p>
+                <label>&nbsp; &nbsp; &nbsp; &nbsp; User ID :&nbsp;&nbsp;</label>
+                <input id="userid" name="userid"  readonly ">
+                <label>&nbsp; &nbsp; &nbsp; &nbsp; Country :&nbsp;&nbsp;</label>
+                <input id="country" name="country" readonly ">
+            </p>
+            <p>&nbsp;
+                <label>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;State :&nbsp;&nbsp;</label>
+                <input id="state" name="state" readonly ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            </p>
+        </div>
+        <div id="usrHobbies">
+            <!-- <h5> Your Hobbies are ..</h5> -->
+            <span>Your Hobbies are ..</span>
+            <table id="myTable" style="height: 63px;" border="1" width="135">
+                <tbody>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="aboutU">
+            <img src="/vanand/MyPIPassessments/image/aboutU.png"  alt="about YOU"/>
+            <textarea cols="90" name="aboutI" readonly="readonly" rows="2"></textarea>
+        </div>
+    </form>
+</center>
+</body>
+</html>

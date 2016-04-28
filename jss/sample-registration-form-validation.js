@@ -1,5 +1,8 @@
-    // // Onload Function
-    // // Loading the value and description of country in an array
+    var userHobby = new Object();
+    var just = new Object();
+
+    // Onload Function
+    // Loading the value and description of country in an array
     var stateObject = {
         "India": {
             "Karnataka": [],
@@ -26,20 +29,21 @@
         }
     }
 
-    function showhideRegisterDiv(formObj){
-        var div = formObj['regForm'];
-        if (div.style.display !== "none") 
-            {
-                div.style.display = "none";
-            }
-        else {
-                div.style.display = "block";
-            }
-        };
 
-    // formValidation for Register Form
-    var userDet = {}
-    var userHobby = {}
+    // creating the hiddent fields
+    function showRegForm() {
+        loging_div = document.getElementById('logInPanel');
+        reg_div = document.getElementById('uname');
+
+        if (loging_div.style.display == 'none') {
+            reg_div.style.display = 'none';
+            loging_div.style.display = 'block';
+        } else {
+            loging_div.style.display = 'none';
+            reg_div.style.display = 'block';
+        }
+    };
+
 
     function formValidation(formObj) {
         var Fname = formObj['firstname'];
@@ -52,18 +56,25 @@
         var ucountry = formObj['countySel'];
         var ustate = formObj['stateSel'];
 
+        var userDet = new Object(); // or the shorthand way --> var userDet = {};
+
         // Method are being called from each condition to validate the fields
         if (ValidateFName(Fname) && ValidateLName(Lname) && ValidateDOB(dob) && ValidateGender(gender) &&
             ValidateUserId(uid) && ValidatePSW(passid) && ValidateConfPSW(passid, conf_psw) &&
             ValidateCountry(ucountry) && ValidateState(ustate)) {
 
-            // Local Storage
-            storeData = window.localStorage;
+            userDet['userid'] = uid.value;
+            userDet['firstname'] = Fname.value;
+            userDet['lastname'] = Lname.value;
+            userDet['dob'] = dob.value;
+            userDet['gender'] = gender.value;
+            userDet['password'] = passid.value;
+            userDet['country'] = ucountry.value;
+            userDet['state'] = ustate.value;
 
-            // Put the object into storage
-            storeData.setItem('userTest', JSON.stringify(userDet));
+            just[uid.value] = userDet
 
-            return true;
+            showRegForm();
         } else {
             return false;
         }
@@ -79,7 +90,8 @@
         } else if (!validateMinMax(f_name, 8, 24)) {
             return false;
         } else if (regx.test(f_name.value)) {
-            userDet['firstname'] = f_name.value;
+            // userDet.push(f_name.name = f_name.value);
+            // userDet['firstname'] = f_name.value;
             return true;
         } else {
             alert("User First Name should be Alphabet");
@@ -91,12 +103,11 @@
         regx = /^[a-zA-Z ]*$/;
 
         // Function invoking for validating lenght.
-        if(l_name.value)
-        {
+        if (l_name.value) {
             if (!validateMinMax(l_name, 8, 24)) {
                 return false;
             } else if (regx.test(l_name.value)) {
-                userDet['lastname'] = l_name.value;
+                // userDet['lastname'] = l_name.value;
                 return true;
             } else {
                 alert("User Last Name should be Alphabet");
@@ -119,7 +130,7 @@
             // form.dob_obj.focus();
             return false;
         } else {
-            userDet['dob'] = dob_obj.value;
+            // userDet['dob'] = dob_obj.value;
             return true;
         }
     };
@@ -131,7 +142,7 @@
         if (!validateEmptyFields(gender)) {
             return false;
         } else if (gender) {
-            userDet['gender'] = gender.value;
+            // userDet['gender'] = gender.value;
             return true;
         }
     };
@@ -146,7 +157,11 @@
         } else if (!validateMinMax(uid, 8, 24)) {
             return false;
         } else if (regx.test(uid.value)) {
-            userDet['userid'] = uid.value;
+            if (just[uid.value])
+            {
+                alert("User id already Exist.");
+                return false;
+            }
             return true;
         } else {
             alert("UserID should not have Spacial Charactors.");
@@ -165,7 +180,7 @@
         } else if (!validateMinMax(passid, 8, 24)) {
             return false;
         } else if (pwd_spl_chrs.test(passid.value)) {
-            userDet['password'] = passid.value;
+            // userDet['password'] = passid.value;
             return true;
         } else {
             alert("Invalid Password. Password should be Minimum 8 characters at least 1 Uppercase Alphabet, 1 Lowercase Alphabet, 1 Number and 1 Special Character");
@@ -192,7 +207,7 @@
         if (!validateEmptyFields(ucountry)) {
             return false;
         } else if (ucountry) {
-            userDet['country'] = ucountry.value;
+            // userDet['country'] = ucountry.value;
             return true;
         }
     };
@@ -203,7 +218,7 @@
         if (!validateEmptyFields(ustate)) {
             return false;
         } else if (ustate) {
-            userDet['state'] = ustate.value;
+            // userDet['state'] = ustate.value;
             return true;
         }
     };
@@ -215,14 +230,14 @@
     var validateEmptyFields = function(fieldObj) {
         // This condition id for Radio/Checkboxes.
         if (fieldObj.length > 1) {
-                if (fieldObj[0].type == 'radio') {
-                    for (var i = 0; i < fieldObj.length; i++) {
-                        if (fieldObj[i].checked)
-                            break;
-                    }
-                    if (i == fieldObj.length)
-                        return alert("Please select "+ fieldObj[0].name);
-                    return true;
+            if (fieldObj[0].type == 'radio') {
+                for (var i = 0; i < fieldObj.length; i++) {
+                    if (fieldObj[i].checked)
+                        break;
+                }
+                if (i == fieldObj.length)
+                    return alert("Please select " + fieldObj[0].name);
+                return true;
             } else if (fieldObj.type == 'select-one') {
                 for (var i = 0; i < fieldObj.length; i++) {
                     if (fieldObj.selectedIndex == 0)
@@ -261,36 +276,29 @@
             return false;
         }
 
+            //check if there are Registered datas.
+            var userIDMatch = null;
+            var pswMatch = null;
 
-        // getting the user details from the array
-        var getData = window.localStorage;
+            if (!userIDMatch && pswMatch) {
+                alert("UserID or Password is not exists. Please register.");
+            } else if ((just[user_id.value]) && (just[user_id.value]['password'] == password.value)) {
+                alert("Your are successfully logged in.");
 
+                loging_div = document.getElementById('logInPanel');
+                sel_div = document.getElementById('multiSelect');
 
-        // Retrieve the object from storage
-        var retrievedObject = getData.getItem('userTest');
-        var logDet = JSON.parse(retrievedObject);
+                loging_div.style.display = 'none';
+                sel_div.style.display = 'block';
 
-        //check if there are Registered datas.
-        if(getData.length != 0)
-        {
-            var userIDMatch = logDet.userid;
-            var pswMatch = logDet.password;
-
-        if (!userIDMatch && pswMatch) {
-            alert("UserID or Password is not exists. Please register.");
-        } else if ((userIDMatch == user_id.value) && (pswMatch == password.value)) {
-            alert("Your are successfully logged in.");
-            get_details = window.location.search
-            window.location = 'multiselect.html?userDetails=' + get_details;
-        } else {
-            alert("UserID or Password not valid.");
-            return false;
-        }
-        }
-        else{
-            alert("Seems like " + user_id.value + " is not registered. Please register and Login.");
-            return false;
-        }
+                return true;
+            } else {
+                alert("UserID or Password not valid.");
+                return false;
+            }
+        // } else {
+        //     alert("Seems like " + user_id.value + " is not registered. Please register and Login.");
+        //     return false;
     };
 
 
@@ -299,13 +307,13 @@
     function multiSelectValidation(MultiSelect) {
 
         var selHobbies = MultiSelect['hobbies'];
-        if (!validateEmptyHobSpot(selHobbies)){
+        if (!validateEmptyHobSpot(selHobbies)) {
             return false;
         }
-        
+
         // Validating favourite spot
         var selFavSpot = MultiSelect['favspot'];
-        if (!validateEmptyHobSpot(selFavSpot)){
+        if (!validateEmptyHobSpot(selFavSpot)) {
             return false;
         }
 
@@ -315,102 +323,89 @@
         if (!validateEmptyFields(selTongue)) {
             return false;
         } else if (selTongue) {
-            userDet['tongue'] = selTongue.value;
+            userHobby['tongue'] = selTongue.value;
         }
 
-         //TextArea validation
+        //TextArea validation
         var TextArea = MultiSelect['aboutUser'];
-            if(TextArea.value){
-                userHobby[TextArea.name] = TextArea.value;
-
-                // Put the object into storage
-                storeData.setItem('Uabout', JSON.stringify(userHobby));
-                return true;
+        if (TextArea.value) {
+            userHobby[TextArea.name] = TextArea.value;
         }
+        sel_div = document.getElementById('multiSelect');
+        det = document.getElementById('mbrDet');
+
+        sel_div.style.display = 'none';
+        det.style.display = 'block';
         return true;
     };
 
 
-        function validateEmptyHobSpot(selectObj){
+    function validateEmptyHobSpot(selectObj) {
+        // array that will store the value of selected checkboxes
+        var checkedValue = [];
 
-        // Local Storage
-        var storeData = window.localStorage;
-        
         //defining the counter variable for counting checked
         var counter = 0;
 
-        for(var i=0;i<selectObj.length;i++) 
-        {
-            if (selectObj[i].checked){
-                counter  += 1;
-                userHobby[selectObj[i].name] = selectObj[i].value;
-
-                // Put the object into storage
-                storeData.setItem('selHob', JSON.stringify(userHobby));
+        for (var i = 0; i < selectObj.length; i++) {
+            if (selectObj[i].checked) {
+                counter += 1;
+                checkedValue.push(selectObj[i].value);
             }
             if (i == selectObj.length)
                 return true;
-       }
-       if(!counter){
+        }
+        if (!counter) {
             return alert("Please select your " + selectObj[0].name);
         }
         return true;
     };
 
-        function updateDetails(mbrObj) {
-            // getting the user details from the array
-            var getData = window.localStorage;
+    function updateDetails(mbrObj) {
 
-            // Retrieve the user info object from storage
-            var retrievedUserObject = getData.getItem('userTest');
-            var userProfile = JSON.parse(retrievedUserObject);
-
-            userFname = userProfile.firstname;
-            userLname = userProfile.lastname;
-            userDOB = userProfile.dob;
-            userGender = userProfile.gender;
-            userID = userProfile.userid;
-            userCountry = userProfile.country;
-            userState = userProfile.state;
-
-            // Retrieve the user info object from storage
-            var retrievedHobbiesObject = getData.getItem('Uabout');
-            var userHobbies = JSON.parse(retrievedHobbiesObject);
-
-            //fetching the hobbies
-            game = userHobbies.game;
-            swim = userHobbies.swim;
-            walk = userHobbies.walk;
-            sing = userHobbies.sing;
-            paint = userHobbies.paint;
-            dance = userHobbies.dance;
-            read = userHobbies.read;
-            teach = userHobbies.teach;
-            sleep = userHobbies.sleep;
-            aboutText = userHobbies.aboutUser;
-
-            //Update user details into the fiels.
-            mbrObj.fname.value = userFname;
-            mbrObj.lname.value = userLname;
-            mbrObj.dob.value = userDOB;
-            mbrObj.gender.value = userGender;
-            mbrObj.userid.value = userID;
-            mbrObj.country.value = userCountry;
-            mbrObj.state.value = userState;
+        userFname = userDet.firstname;
+        userLname = userDet.lastname;
+        userDOB = userDet.dob;
+        userGender = userDet.gender;
+        userID = userDet.userid;
+        userCountry = userDet.country;
+        userState = userDet.state;
 
 
-            //Update user hobbies into the fields
-            var myTable = document.getElementById('myTable');
-            myTable.rows[0].cells[0].innerHTML = game;
-            myTable.rows[0].cells[1].innerHTML = swim;
-            myTable.rows[0].cells[2].innerHTML = walk;
-            myTable.rows[1].cells[0].innerHTML = sing;
-            myTable.rows[1].cells[1].innerHTML = paint;
-            myTable.rows[1].cells[2].innerHTML = dance;
-            myTable.rows[2].cells[0].innerHTML = read;
-            myTable.rows[2].cells[1].innerHTML = teach;
-            myTable.rows[2].cells[2].innerHTML = sleep;
+        //fetching the hobbies
+        game = userHobbies.game;
+        swim = userHobbies.swim;
+        walk = userHobbies.walk;
+        sing = userHobbies.sing;
+        paint = userHobbies.paint;
+        dance = userHobbies.dance;
+        read = userHobbies.read;
+        teach = userHobbies.teach;
+        sleep = userHobbies.sleep;
+        aboutText = userHobbies.aboutUser;
 
-            //Update about user into the textarea.
-            mbrObj.getElementsByTagName('textarea').aboutI.value = aboutText;
-        };
+        //Update user details into the fiels.
+        mbrObj.fname.value = userFname;
+        mbrObj.lname.value = userLname;
+        mbrObj.dob.value = userDOB;
+        mbrObj.gender.value = userGender;
+        mbrObj.userid.value = userID;
+        mbrObj.country.value = userCountry;
+        mbrObj.state.value = userState;
+
+
+        //Update user hobbies into the fields
+        var myTable = document.getElementById('myTable');
+        myTable.rows[0].cells[0].innerHTML = game;
+        myTable.rows[0].cells[1].innerHTML = swim;
+        myTable.rows[0].cells[2].innerHTML = walk;
+        myTable.rows[1].cells[0].innerHTML = sing;
+        myTable.rows[1].cells[1].innerHTML = paint;
+        myTable.rows[1].cells[2].innerHTML = dance;
+        myTable.rows[2].cells[0].innerHTML = read;
+        myTable.rows[2].cells[1].innerHTML = teach;
+        myTable.rows[2].cells[2].innerHTML = sleep;
+
+        //Update about user into the textarea.
+        mbrObj.getElementsByTagName('textarea').aboutI.value = aboutText;
+    };
