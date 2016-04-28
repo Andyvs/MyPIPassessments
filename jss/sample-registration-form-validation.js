@@ -276,29 +276,26 @@
             return false;
         }
 
-            //check if there are Registered datas.
-            var userIDMatch = null;
-            var pswMatch = null;
+        //check if there are Registered datas.
+        var userIDMatch = null;
+        var pswMatch = null;
 
-            if (!userIDMatch && pswMatch) {
-                alert("UserID or Password is not exists. Please register.");
-            } else if ((just[user_id.value]) && (just[user_id.value]['password'] == password.value)) {
-                alert("Your are successfully logged in.");
+        if (!userIDMatch && pswMatch) {
+            alert("UserID or Password is not exists. Please register.");
+        } else if ((just[user_id.value]) && (just[user_id.value]['password'] == password.value)) {
+            alert("Your are successfully logged in.");
 
-                loging_div = document.getElementById('logInPanel');
-                sel_div = document.getElementById('multiSelect');
+            loging_div = document.getElementById('logInPanel');
+            sel_div = document.getElementById('multiSelect');
 
-                loging_div.style.display = 'none';
-                sel_div.style.display = 'block';
+            loging_div.style.display = 'none';
+            sel_div.style.display = 'block';
 
-                return true;
-            } else {
-                alert("UserID or Password not valid.");
-                return false;
-            }
-        // } else {
-        //     alert("Seems like " + user_id.value + " is not registered. Please register and Login.");
-        //     return false;
+            return true;
+        } else {
+            alert("UserID or Password not valid.");
+            return false;
+        }
     };
 
 
@@ -323,19 +320,20 @@
         if (!validateEmptyFields(selTongue)) {
             return false;
         } else if (selTongue) {
-            userHobby['tongue'] = selTongue.value;
+            just['tongue'] = selTongue.value;
         }
 
         //TextArea validation
         var TextArea = MultiSelect['aboutUser'];
         if (TextArea.value) {
-            userHobby[TextArea.name] = TextArea.value;
+            just[TextArea.name] = TextArea.value;
         }
         sel_div = document.getElementById('multiSelect');
         det = document.getElementById('mbrDet');
 
         sel_div.style.display = 'none';
         det.style.display = 'block';
+        window.onload = updateDetails();
         return true;
     };
 
@@ -351,6 +349,13 @@
             if (selectObj[i].checked) {
                 counter += 1;
                 checkedValue.push(selectObj[i].value);
+                if(selectObj[i].name == 'hobbies'){
+                    just['hobbies'] = checkedValue    
+                }
+                else if(selectObj[i].name == 'favspot'){
+                    just['favSpot'] = checkedValue
+                }
+           
             }
             if (i == selectObj.length)
                 return true;
@@ -363,49 +368,38 @@
 
     function updateDetails(mbrObj) {
 
-        userFname = userDet.firstname;
-        userLname = userDet.lastname;
-        userDOB = userDet.dob;
-        userGender = userDet.gender;
-        userID = userDet.userid;
-        userCountry = userDet.country;
-        userState = userDet.state;
+    if (just['Andyvs123']){
+        userFname = just['Andyvs123'].firstname;
+        userLname = just['Andyvs123'].lastname;
+        userDOB = just['Andyvs123'].dob;
+        userGender = just['Andyvs123'].gender;
+        userID = just['Andyvs123'].userid;
+        userCountry = just['Andyvs123'].country;
+        userState = just['Andyvs123'].state;
 
-
-        //fetching the hobbies
-        game = userHobbies.game;
-        swim = userHobbies.swim;
-        walk = userHobbies.walk;
-        sing = userHobbies.sing;
-        paint = userHobbies.paint;
-        dance = userHobbies.dance;
-        read = userHobbies.read;
-        teach = userHobbies.teach;
-        sleep = userHobbies.sleep;
-        aboutText = userHobbies.aboutUser;
 
         //Update user details into the fiels.
-        mbrObj.fname.value = userFname;
-        mbrObj.lname.value = userLname;
-        mbrObj.dob.value = userDOB;
-        mbrObj.gender.value = userGender;
-        mbrObj.userid.value = userID;
-        mbrObj.country.value = userCountry;
-        mbrObj.state.value = userState;
+        document.getElementById('fname').value = userFname;
+        document.getElementById('lname').value = userLname;
+        document.getElementById('dob').value = userDOB;
+        document.getElementById('gender').value = userGender;
+        document.getElementById('userid').value = userID;
+        document.getElementById('country').value = userCountry;
+        document.getElementById('state').value = userState;
 
-
-        //Update user hobbies into the fields
-        var myTable = document.getElementById('myTable');
-        myTable.rows[0].cells[0].innerHTML = game;
-        myTable.rows[0].cells[1].innerHTML = swim;
-        myTable.rows[0].cells[2].innerHTML = walk;
-        myTable.rows[1].cells[0].innerHTML = sing;
-        myTable.rows[1].cells[1].innerHTML = paint;
-        myTable.rows[1].cells[2].innerHTML = dance;
-        myTable.rows[2].cells[0].innerHTML = read;
-        myTable.rows[2].cells[1].innerHTML = teach;
-        myTable.rows[2].cells[2].innerHTML = sleep;
+        // Getting hobbies from object
+        for(i=1; i<=just['hobbies'].length;i++)
+            {
+                selValue = just['hobbies'][i];
+                
+                var elem_id = 'hob' + i
+                document.getElementById(elem_id).value = selValue
+            }
 
         //Update about user into the textarea.
-        mbrObj.getElementsByTagName('textarea').aboutI.value = aboutText;
+        document.getElementById('textarea').value = just['aboutUser'];
+        }
+    else{
+        alert("These are not records of the loggedIn user")
+    }
     };
